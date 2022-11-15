@@ -22,4 +22,9 @@ public class PickableItem : SimulatorInteractable
         p_controller.Pickup(this);
     }
 
+    public void Drop()
+    {
+        _collider.enabled = true;
+    }
+
 }

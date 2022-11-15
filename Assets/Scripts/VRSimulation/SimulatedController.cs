@@ -50,6 +50,8 @@ public class SimulatedController : MonoBehaviour
     [SerializeField]
     float _angularSpeed = 5f;
 
+    private bool _forceCheck = false;
+
     void Start()
     {
         moveAction.action.Enable();
@@ -69,7 +71,7 @@ public class SimulatedController : MonoBehaviour
         if (!_hasControl)
             return;
 
-        if (_movement != Vector3.zero)
+        if (_forceCheck || _movement != Vector3.zero)
         {
             transform.position += transform.rotation * _movement * Time.deltaTime;
             CheckForInteractable();
@@ -136,6 +138,8 @@ public class SimulatedController : MonoBehaviour
                 _currentlySelectedInteractable = null;
             }
         }
+
+        
     }
 
     void SelectInteractable(InputAction.CallbackContext p_ctx)
@@ -145,6 +149,9 @@ public class SimulatedController : MonoBehaviour
 
         _currentlySelectedInteractable.OnSelect?.Invoke();
         _currentlySelectedInteractable.Select(this, _currentlyHeldItem);
+
+        // Check in case currently selected interactable has changed
+        _forceCheck = true;
     }
 
     public void Pickup(PickableItem p_itemToPick)
@@ -162,5 +169,14 @@ public class SimulatedController : MonoBehaviour
         _currentlyHeldItem.transform.localRotation = Quaternion.identity;
 
         OnPickUpItem?.Invoke();
+    }
+
+    public void RemoveItem()
+    {
+        if (_currentlyHeldItem == null)
+            return;
+
+        _currentlyHeldItem.GetComponent<PickableItem>().Drop();
+        _currentlyHeldItem = null;
     }
 }

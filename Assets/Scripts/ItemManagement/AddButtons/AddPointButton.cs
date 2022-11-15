@@ -11,6 +11,9 @@ public class AddPointButton : AddToInventoryButton
 
         InventoryElement pickedUpElement = p_controllerItem.GetComponent<PickableItem>().InventoryData;
         if ((pickedUpElement as InventoryPoint) != null)
+        {
             inventory.AddInventoryElement(pickedUpElement as InventoryPoint, p_controllerItem);
+            p_controller.RemoveItem();
+        }
     }
 }

@@ -11,6 +11,9 @@ public class AddInstrumentButton : AddToInventoryButton
 
         InventoryElement pickedUpElement = p_controllerItem.GetComponent<PickableItem>().InventoryData;
         if ((pickedUpElement as Instrument) != null)
+        {
             inventory.AddInventoryElement(pickedUpElement as Instrument, p_controllerItem);
+            p_controller.RemoveItem();
+        }
     }
 }

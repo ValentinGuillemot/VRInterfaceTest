@@ -29,7 +29,21 @@ public class Inventory : MonoBehaviour
             newElementObject.transform.SetSiblingIndex(ElementUIHandle.transform.childCount - 2);
             newElementObject.name = p_element.ElementName;
 
-            newElementObject.GetComponent<InventoryElementUI>().SetupUI(p_element);
+            InventoryElementUI newElementUI = newElementObject.GetComponent<InventoryElementUI>();
+            newElementUI.SetupUI(p_element);
+            newElementUI.OnRemoveFromInventory += RemoveFromInventory;
+        }
+
+        public void RemoveFromInventory(InventoryElementUI p_element)
+        {
+            for (int i = 0; i < Elements.Count; ++i)
+            {
+                if (ElementUIHandle.transform.GetChild(i).GetComponent<InventoryElementUI>() == p_element)
+                {
+                    Elements.RemoveAt(i);
+                    return;
+                }
+            }
         }
     }
 

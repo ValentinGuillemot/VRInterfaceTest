@@ -145,7 +145,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5753432733899946663}
   - component: {fileID: 180815400012265679}
-  m_Layer: 0
+  - component: {fileID: 761991825533852732}
+  m_Layer: 6
   m_Name: InventoryElementUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,6 +189,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameTMP: {fileID: 5753432733836888390}
   elementImage: {fileID: 5753432734891073004}
+--- !u!65 &761991825533852732
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5753432733899946656}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 813.3, y: 112.3, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5753432734891073006
 GameObject:
   m_ObjectHideFlags: 0

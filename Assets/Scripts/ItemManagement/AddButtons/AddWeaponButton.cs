@@ -11,6 +11,9 @@ public class AddWeaponButton : AddToInventoryButton
 
         InventoryElement pickedUpElement = p_controllerItem.GetComponent<PickableItem>().InventoryData;
         if ((pickedUpElement as Weapon) != null)
+        {
             inventory.AddInventoryElement(pickedUpElement as Weapon, p_controllerItem);
-    }
+            p_controller.RemoveItem();
+        }
+}
 }
