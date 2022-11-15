@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -36,6 +36,8 @@ public class SimulatedController : MonoBehaviour
     SimulatorInteractable _currentlySelectedInteractable;
 
     GameObject _currentlyHeldItem;
+
+    public Action OnPickUpItem;
 
     public bool Control
     {
@@ -158,5 +160,7 @@ public class SimulatedController : MonoBehaviour
         _currentlyHeldItem.transform.parent = transform;
         _currentlyHeldItem.transform.localPosition = Vector3.zero;
         _currentlyHeldItem.transform.localRotation = Quaternion.identity;
+
+        OnPickUpItem?.Invoke();
     }
 }

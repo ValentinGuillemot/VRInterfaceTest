@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "InventoryElement/Instrument", order = 3)]
+[CreateAssetMenu(menuName = "InventoryElement/Instrument", fileName = "Instrument", order = 3)]
 public class Instrument : InventoryElement
 {
 

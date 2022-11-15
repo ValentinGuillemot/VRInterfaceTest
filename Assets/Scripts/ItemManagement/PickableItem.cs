@@ -6,6 +6,11 @@ public class PickableItem : SimulatorInteractable
 {
     Collider _collider;
 
+    [SerializeField]
+    InventoryElement inventoryData;
+
+    public InventoryElement InventoryData => inventoryData;
+
     private void Start()
     {
         _collider = GetComponent<Collider>();
