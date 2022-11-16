@@ -54,9 +54,9 @@ public class SaveManager : MonoBehaviour
         public void SaveData(Inventory p_inventory)
         {
             IsOpen = p_inventory.gameObject.activeInHierarchy;
-            Weapons = p_inventory.GetWeaponsList();
-            Points = p_inventory.GetPointsList();
-            Instruments = p_inventory.GetInstrumentsList();
+            Weapons = p_inventory.CopyWeaponsList();
+            Points = p_inventory.CopyPointsList();
+            Instruments = p_inventory.CopyInstrumentsList();
         }
 
         public void LoadData(Inventory p_inventory)

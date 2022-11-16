@@ -50,11 +50,10 @@ public class Inventory : MonoBehaviour
         {
             Elements.Clear();
 
-            // Last element is the add button and it shouldn't be destroyed
-            int inventoryCount = ElementUIHandle.transform.childCount - 2;
+            int inventoryCount = ElementUIHandle.transform.childCount - 1;
             for (int i = 0; i < inventoryCount; i++)
             {
-                Destroy(ElementUIHandle.transform.GetChild(0).gameObject);
+                Destroy(ElementUIHandle.transform.GetChild(i).gameObject);
             }
         }
     }
@@ -127,19 +126,19 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public List<Weapon> GetWeaponsList()
+    public List<Weapon> CopyWeaponsList()
     {
-        return weapons.Elements;
+        return new List<Weapon>(weapons.Elements);
     }
 
-    public List<InventoryPoint> GetPointsList()
+    public List<InventoryPoint> CopyPointsList()
     {
-        return points.Elements;
+        return new List<InventoryPoint>(points.Elements);
     }
 
-    public List<Instrument> GetInstrumentsList()
+    public List<Instrument> CopyInstrumentsList()
     {
-        return instruments.Elements;
+        return new List<Instrument>(instruments.Elements);
     }
 
     public void ClearInventory()

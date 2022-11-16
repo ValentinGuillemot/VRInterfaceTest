@@ -17,12 +17,15 @@ public class Player : MonoBehaviour
     [SerializeField]
     InputActionReference inventoryButton;
 
+    [SerializeField]
+    PickableItem savePickup;
+
     private void Start()
     {
         leftController.OnPickUpItem += inventory.OpenInventory;
         rightController.OnPickUpItem += inventory.OpenInventory;
-        leftController.OnPickUpItem += SaveOnce;
-        rightController.OnPickUpItem += SaveOnce;
+        leftController.OnPickUpItem += SaveAfterPickingUpItem;
+        rightController.OnPickUpItem += SaveAfterPickingUpItem;
 
         inventoryButton.action.Enable();
         inventoryButton.action.performed += ToggleInventory;
@@ -37,10 +40,13 @@ public class Player : MonoBehaviour
     }
 
     // Save data only first time stone is being picked up
-    private void SaveOnce()
+    private void SaveAfterPickingUpItem()
     {
-        SaveManager.Instance.Save();
-        leftController.OnPickUpItem -= SaveOnce;
-        rightController.OnPickUpItem -= SaveOnce;
+        if (leftController.HeldItem == savePickup.gameObject || rightController.HeldItem == savePickup.gameObject)
+        {
+            SaveManager.Instance.Save();
+            leftController.OnPickUpItem -= SaveAfterPickingUpItem;
+            rightController.OnPickUpItem -= SaveAfterPickingUpItem;
+        }
     }
 }

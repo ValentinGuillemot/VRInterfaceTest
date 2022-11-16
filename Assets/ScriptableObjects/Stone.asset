@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Stone
   m_EditorClassIdentifier: 
   ElementName: Stone
-  ElementSprite: {fileID: 0}
+  ElementSprite: {fileID: 21300000, guid: 7c0f63d764caccb4dbe316361c366e7d, type: 3}
   ElementObject: {fileID: 5571918104333593679, guid: 608b374a70a610b49b213097c88a1c29,
     type: 3}

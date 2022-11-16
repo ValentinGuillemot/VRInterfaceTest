@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: ExampleWeapon2
   m_EditorClassIdentifier: 
   ElementName: Lizard Crystal
+  ElementSprite: {fileID: 21300000, guid: e954212b0c168a94da3719b4f7cb473a, type: 3}
+  ElementObject: {fileID: 3015773026858504669, guid: a82cbac94e38b63459dee389cfb1f549,
+    type: 3}

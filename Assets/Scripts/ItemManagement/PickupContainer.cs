@@ -12,10 +12,20 @@ public class PickupContainer : SimulatorInteractable
 
     GameObject _storedItem;
 
+    [SerializeField]
+    InventoryElement acceptedPickup;
+
     public override void Select(SimulatedController p_controller, GameObject p_controllerItem)
     {
         if (!p_controllerItem)
             return;
+
+        // If an accepted pickup has been setup, only this pickup can be stored
+        if (acceptedPickup && acceptedPickup != p_controllerItem.GetComponent<PickableItem>().InventoryData)
+        {
+            SoundManager.Instance.PlayWrongInputSound();
+            return;
+        }
 
         p_controllerItem.transform.parent = storedItemHandle.transform;
         p_controllerItem.transform.localPosition = Vector3.zero;

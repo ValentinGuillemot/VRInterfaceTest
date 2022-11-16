@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: ExampleWeapon3
   m_EditorClassIdentifier: 
   ElementName: Crush Skull Steel
+  ElementSprite: {fileID: 21300000, guid: c25bf8bb53626a04bb135a64e2fbeb0f, type: 3}
+  ElementObject: {fileID: 6075234664941327162, guid: 8b5be41bab1eba148a1d0a99c93c3640,
+    type: 3}

@@ -9,6 +9,9 @@ public class SimulatedController : MonoBehaviour
     InputActionReference moveAction;
 
     [SerializeField]
+    InputActionReference forwardMovementAction;
+
+    [SerializeField]
     InputActionReference lookAction;
 
     [SerializeField]
@@ -57,11 +60,14 @@ public class SimulatedController : MonoBehaviour
     void Start()
     {
         moveAction.action.Enable();
+        forwardMovementAction.action.Enable();
         lookAction.action.Enable();
         selectAction.action.Enable();
 
         moveAction.action.performed += MoveController;
         moveAction.action.canceled += MoveController;
+        forwardMovementAction.action.performed += MoveControllerForward;
+        forwardMovementAction.action.canceled += MoveControllerForward;
         lookAction.action.performed += RotateController;
         selectAction.action.performed += SelectInteractable;
 
@@ -86,6 +92,14 @@ public class SimulatedController : MonoBehaviour
             return;
 
         _movement = p_ctx.ReadValue<Vector2>();
+    }
+
+    void MoveControllerForward(InputAction.CallbackContext p_ctx)
+    {
+        if (!_hasControl)
+            return;
+
+        _movement.z = Mathf.Clamp(p_ctx.ReadValue<float>(), -1f, 1f);
     }
 
     void RotateController(InputAction.CallbackContext p_ctx)
