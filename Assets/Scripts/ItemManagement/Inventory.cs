@@ -45,6 +45,18 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
+
+        public void Clear()
+        {
+            Elements.Clear();
+
+            // Last element is the add button and it shouldn't be destroyed
+            int inventoryCount = ElementUIHandle.transform.childCount - 2;
+            for (int i = 0; i < inventoryCount; i++)
+            {
+                Destroy(ElementUIHandle.transform.GetChild(0).gameObject);
+            }
+        }
     }
 
     [SerializeField]
@@ -91,7 +103,8 @@ public class Inventory : MonoBehaviour
         if (newWeapon)
         {
             weapons.Add(InventoryElementUIPrefab, newWeapon);
-            Destroy(p_elementObject);
+            if (p_elementObject)
+                Destroy(p_elementObject);
             return;
         }
 
@@ -99,7 +112,8 @@ public class Inventory : MonoBehaviour
         if (newPoint)
         {
             points.Add(InventoryElementUIPrefab, newPoint);
-            Destroy(p_elementObject);
+            if (p_elementObject)
+                Destroy(p_elementObject);
             return;
         }
 
@@ -107,7 +121,8 @@ public class Inventory : MonoBehaviour
         if (newInstrument)
         {
             instruments.Add(InventoryElementUIPrefab, newInstrument);
-            Destroy(p_elementObject);
+            if (p_elementObject)
+                Destroy(p_elementObject);
             return;
         }
     }
@@ -125,5 +140,14 @@ public class Inventory : MonoBehaviour
     public List<Instrument> GetInstrumentsList()
     {
         return instruments.Elements;
+    }
+
+    public void ClearInventory()
+    {
+        weapons.Clear();
+        points.Clear();
+        instruments.Clear();
+
+        CloseInventory();
     }
 }

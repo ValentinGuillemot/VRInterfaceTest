@@ -21,9 +21,17 @@ public class PickupContainer : SimulatorInteractable
         p_controllerItem.transform.localPosition = Vector3.zero;
         p_controllerItem.transform.localRotation = Quaternion.identity;
 
-        OnStoreItem?.Invoke();
-
         _storedItem = p_controllerItem;
         p_controller.RemoveItem();
+
+        OnStoreItem?.Invoke();
+    }
+
+    public void SetItem(GameObject p_item)
+    {
+        if (_storedItem != p_item)
+            Destroy(_storedItem);
+
+        _storedItem = p_item;
     }
 }

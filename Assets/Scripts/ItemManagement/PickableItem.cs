@@ -24,7 +24,8 @@ public class PickableItem : SimulatorInteractable
 
     public void Drop()
     {
-        _collider.enabled = true;
+        if (_collider)
+            _collider.enabled = true;
     }
 
 }

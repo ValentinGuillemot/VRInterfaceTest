@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
     {
         leftController.OnPickUpItem += inventory.OpenInventory;
         rightController.OnPickUpItem += inventory.OpenInventory;
+        leftController.OnPickUpItem += SaveOnce;
+        rightController.OnPickUpItem += SaveOnce;
 
         inventoryButton.action.Enable();
         inventoryButton.action.performed += ToggleInventory;
@@ -32,5 +34,13 @@ public class Player : MonoBehaviour
             inventory.CloseInventory();
         else
             inventory.OpenInventory();
+    }
+
+    // Save data only first time stone is being picked up
+    private void SaveOnce()
+    {
+        SaveManager.Instance.Save();
+        leftController.OnPickUpItem -= SaveOnce;
+        rightController.OnPickUpItem -= SaveOnce;
     }
 }
