@@ -37,6 +37,8 @@ public class SimulatedController : MonoBehaviour
 
     GameObject _currentlyHeldItem;
 
+    public GameObject HeldItem => _currentlyHeldItem;
+
     public Action OnPickUpItem;
 
     public bool Control

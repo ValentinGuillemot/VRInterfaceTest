@@ -111,4 +111,19 @@ public class Inventory : MonoBehaviour
             return;
         }
     }
+
+    public List<Weapon> GetWeaponsList()
+    {
+        return weapons.Elements;
+    }
+
+    public List<InventoryPoint> GetPointsList()
+    {
+        return points.Elements;
+    }
+
+    public List<Instrument> GetInstrumentsList()
+    {
+        return instruments.Elements;
+    }
 }
