@@ -14,6 +14,9 @@ public class AddPointButton : AddToInventoryButton
         {
             inventory.AddInventoryElement(pickedUpElement as InventoryPoint, p_controllerItem);
             p_controller.RemoveItem();
+            SoundManager.Instance.PlayValidInputSound();
         }
+        else
+            SoundManager.Instance.PlayWrongInputSound();
     }
 }

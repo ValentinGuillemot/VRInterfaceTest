@@ -14,6 +14,9 @@ public class AddWeaponButton : AddToInventoryButton
         {
             inventory.AddInventoryElement(pickedUpElement as Weapon, p_controllerItem);
             p_controller.RemoveItem();
+            SoundManager.Instance.PlayValidInputSound();
         }
+        else
+            SoundManager.Instance.PlayWrongInputSound();
 }
 }
