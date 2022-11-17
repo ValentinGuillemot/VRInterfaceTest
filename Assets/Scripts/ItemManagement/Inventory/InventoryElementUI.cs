@@ -18,7 +18,8 @@ public class InventoryElementUI : SimulatorInteractable
 
     public override void Select(SimulatedController p_controller, GameObject p_controllerItem)
     {
-        if (_elementObject == null)
+        // If there is no object to give or if the controller is already holding an item, cancels the selection
+        if (_elementObject == null || p_controllerItem != null)
             return;
 
         GameObject pickup = Instantiate(_elementObject);
