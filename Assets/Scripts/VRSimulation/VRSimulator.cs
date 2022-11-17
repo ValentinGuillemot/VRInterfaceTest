@@ -63,7 +63,6 @@ public class VRSimulator : MonoBehaviour
 
     bool _hasControl = true;
 
-    // Start is called before the first frame update
     void Start()
     {
         moveAction.action.Enable();
@@ -102,6 +101,10 @@ public class VRSimulator : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Move line indicating the position to where the user can warp
+    /// </summary>
+    /// <param name="p_ctx"></param>
     void MoveWarpCursor(InputAction.CallbackContext p_ctx)
     {
         if (!_hasControl)
@@ -123,6 +126,9 @@ public class VRSimulator : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Update Line renderer used to display where the user can warp
+    /// </summary>
     void UpdateWarpLine()
     {
         if (Physics.Raycast(warpLine.gameObject.transform.position, transform.rotation * warpDirection, out RaycastHit hit, 100f))
@@ -133,6 +139,10 @@ public class VRSimulator : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Warp player to position based on warp line. Called by player input
+    /// </summary>
+    /// <param name="p_ctx"></param>
     void Warp(InputAction.CallbackContext p_ctx)
     {
         if (!_hasControl || !warpLine.enabled)
@@ -142,6 +152,10 @@ public class VRSimulator : MonoBehaviour
         warpLine.enabled = false;
     }
 
+    /// <summary>
+    /// Rotate camera based on player input
+    /// </summary>
+    /// <param name="p_ctx"></param>
     void LookAround(InputAction.CallbackContext p_ctx)
     {
         if (!_hasControl)
@@ -161,6 +175,10 @@ public class VRSimulator : MonoBehaviour
         cam.transform.localRotation = Quaternion.Euler(_cameraAngles.y, _cameraAngles.x, 0f);
     }
 
+    /// <summary>
+    /// Switch control between the simulator (camera) and the two controllers
+    /// </summary>
+    /// <param name="p_ctx"></param>
     void SwitchControl(InputAction.CallbackContext p_ctx)
     {
         if (_hasControl)

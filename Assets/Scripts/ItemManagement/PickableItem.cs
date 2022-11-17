@@ -18,10 +18,14 @@ public class PickableItem : SimulatorInteractable
 
     public override void Select(SimulatedController p_controller, GameObject p_controllerItem)
     {
+        // When the item is picked up, it can no longer be interacted with as a selectable item, so the collider gets deactivated
         _collider.enabled = false;
         p_controller.Pickup(this);
     }
 
+    /// <summary>
+    /// Drop item, which allows it to be interacted with and picked up again
+    /// </summary>
     public void Drop()
     {
         if (_collider)

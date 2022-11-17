@@ -13,6 +13,10 @@ public class SaveManager : MonoBehaviour
         public GameObject Item;
         public InventoryElement ItemElement;
 
+        /// <summary>
+        /// Store position, rotation and object held by a controller
+        /// </summary>
+        /// <param name="p_controller"></param>
         public void SaveData(SimulatedController p_controller)
         {
             Pos = p_controller.gameObject.transform.position;
@@ -24,6 +28,10 @@ public class SaveManager : MonoBehaviour
                 ItemElement = null;
         }
 
+        /// <summary>
+        /// Reset position, rotation and object of given controller to saved values
+        /// </summary>
+        /// <param name="p_controller"></param>
         public void LoadData(SimulatedController p_controller)
         {
             p_controller.gameObject.transform.position = Pos;
@@ -51,6 +59,10 @@ public class SaveManager : MonoBehaviour
 
         public bool IsOpen;
 
+        /// <summary>
+        /// Save a copy of items list of inventory
+        /// </summary>
+        /// <param name="p_inventory"></param>
         public void SaveData(Inventory p_inventory)
         {
             IsOpen = p_inventory.gameObject.activeInHierarchy;
@@ -59,6 +71,10 @@ public class SaveManager : MonoBehaviour
             Instruments = p_inventory.CopyInstrumentsList();
         }
 
+        /// <summary>
+        /// Recreate inventory with item lists previously saved
+        /// </summary>
+        /// <param name="p_inventory"></param>
         public void LoadData(Inventory p_inventory)
         {
             p_inventory.ClearInventory();
@@ -97,6 +113,9 @@ public class SaveManager : MonoBehaviour
         public TextMeshPro textToSave;
         public string text;
 
+        /// <summary>
+        /// Reset TMPro text to stored value
+        /// </summary>
         public void LoadData()
         {
             textToSave.text = text;
@@ -118,6 +137,9 @@ public class SaveManager : MonoBehaviour
 
         public List<TextSaveData> savedTexts;
 
+        /// <summary>
+        /// Store what items containers are currently holding (can be null)
+        /// </summary>
         public void SaveContainersData()
         {
             containers = new List<ContainerSaveData>();
@@ -126,7 +148,7 @@ public class SaveManager : MonoBehaviour
             {
                 ContainerSaveData newData = new ContainerSaveData();
                 newData.Container = container;
-                //newData.Object
+                newData.ObjectHeld = container.GetItem();
                 containers.Add(newData);
             }
         }
@@ -156,6 +178,9 @@ public class SaveManager : MonoBehaviour
         Instance = this;
     }
 
+    /// <summary>
+    /// Save current status of tracked objects in scene (player, controllers, inventory, objects)
+    /// </summary>
     public void Save()
     {
         lastSave.PlayerPosition = player.transform.position;
@@ -178,6 +203,9 @@ public class SaveManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Reset status of tracked objects in scene to previously stored values
+    /// </summary>
     public void Load()
     {
         player.transform.position = lastSave.PlayerPosition;

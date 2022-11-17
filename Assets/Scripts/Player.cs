@@ -31,6 +31,10 @@ public class Player : MonoBehaviour
         inventoryButton.action.performed += ToggleInventory;
     }
 
+    /// <summary>
+    /// Open or close the inventory, called by input action
+    /// </summary>
+    /// <param name="p_ctx"></param>
     private void ToggleInventory(InputAction.CallbackContext p_ctx)
     {
         if (inventory.gameObject.activeSelf)
@@ -39,12 +43,16 @@ public class Player : MonoBehaviour
             inventory.OpenInventory();
     }
 
-    // Save data only first time stone is being picked up
+    /// <summary>
+    /// Save data only first time stone is being picked up
+    /// </summary>
     private void SaveAfterPickingUpItem()
     {
         if (leftController.HeldItem == savePickup.gameObject || rightController.HeldItem == savePickup.gameObject)
         {
             SaveManager.Instance.Save();
+
+            // Prevent data to be saved again if the pickup is dropped and picked up again
             leftController.OnPickUpItem -= SaveAfterPickingUpItem;
             rightController.OnPickUpItem -= SaveAfterPickingUpItem;
         }

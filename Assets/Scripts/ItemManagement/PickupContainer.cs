@@ -37,11 +37,24 @@ public class PickupContainer : SimulatorInteractable
         OnStoreItem?.Invoke();
     }
 
+    /// <summary>
+    /// Directly set the item currently stored in the container
+    /// </summary>
+    /// <param name="p_item">New item to store</param>
     public void SetItem(GameObject p_item)
     {
         if (_storedItem != p_item)
             Destroy(_storedItem);
 
         _storedItem = p_item;
+    }
+
+    /// <summary>
+    /// Get item currently stored in the container
+    /// </summary>
+    /// <returns></returns>
+    public GameObject GetItem()
+    {
+        return _storedItem;
     }
 }

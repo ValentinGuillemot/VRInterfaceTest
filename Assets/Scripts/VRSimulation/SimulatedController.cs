@@ -86,6 +86,10 @@ public class SimulatedController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Store x and y movements from input to apply them in next Update
+    /// </summary>
+    /// <param name="p_ctx"></param>
     void MoveController(InputAction.CallbackContext p_ctx)
     {
         if (!_hasControl)
@@ -94,6 +98,10 @@ public class SimulatedController : MonoBehaviour
         _movement = p_ctx.ReadValue<Vector2>();
     }
 
+    /// <summary>
+    /// Store z movements from input to apply it in next Update
+    /// </summary>
+    /// <param name="p_ctx"></param>
     void MoveControllerForward(InputAction.CallbackContext p_ctx)
     {
         if (!_hasControl)
@@ -102,6 +110,10 @@ public class SimulatedController : MonoBehaviour
         _movement.z = Mathf.Clamp(p_ctx.ReadValue<float>(), -1f, 1f);
     }
 
+    /// <summary>
+    /// Store mouse movement to apply it to gameObject rotation
+    /// </summary>
+    /// <param name="p_ctx"></param>
     void RotateController(InputAction.CallbackContext p_ctx)
     {
         if (!_hasControl)
@@ -123,6 +135,9 @@ public class SimulatedController : MonoBehaviour
         CheckForInteractable();
     }
 
+    /// <summary>
+    /// Check with raycast is there is an object the controller can interact with
+    /// </summary>
     void CheckForInteractable()
     {
         if (Physics.Raycast(ray.transform.position, ray.transform.forward, out RaycastHit hit, rayMaxDistance, rayMask))
@@ -158,6 +173,10 @@ public class SimulatedController : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Called from input. If there is a selectable in front of the controller, call its Select method
+    /// </summary>
+    /// <param name="p_ctx"></param>
     void SelectInteractable(InputAction.CallbackContext p_ctx)
     {
         if (!_hasControl || _currentlySelectedInteractable == null)
@@ -169,7 +188,11 @@ public class SimulatedController : MonoBehaviour
         // Check in case currently selected interactable has changed
         _forceCheck = true;
     }
-
+    
+    /// <summary>
+    /// Store pickup object in the controller
+    /// </summary>
+    /// <param name="p_itemToPick"></param>
     public void Pickup(PickableItem p_itemToPick)
     {
         if (_currentlyHeldItem != null)
@@ -187,6 +210,9 @@ public class SimulatedController : MonoBehaviour
         OnPickUpItem?.Invoke();
     }
 
+    /// <summary>
+    /// Remove currently stored pickup
+    /// </summary>
     public void RemoveItem()
     {
         if (_currentlyHeldItem == null)

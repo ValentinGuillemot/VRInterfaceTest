@@ -28,6 +28,10 @@ public class InventoryElementUI : SimulatorInteractable
         Destroy(gameObject);
     }
 
+    /// <summary>
+    /// Set UI elements (text and image) based on given InventoryElement
+    /// </summary>
+    /// <param name="p_element"></param>
     public void SetupUI(InventoryElement p_element)
     {
         nameTMP.text = p_element.ElementName;
